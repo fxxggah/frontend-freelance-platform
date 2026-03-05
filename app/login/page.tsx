@@ -32,7 +32,6 @@ export default function LoginPage() {
     try {
       const data = await login(email, password)
 
-      // salva dados no navegador
       localStorage.setItem("token", data.token)
       localStorage.setItem("userId", data.userId.toString())
       localStorage.setItem("name", data.name)
@@ -54,7 +53,7 @@ export default function LoginPage() {
             <Briefcase className="h-5 w-5 text-primary-foreground" />
           </div>
           <CardTitle className="text-xl font-semibold">
-            Entrar no FreelanceHub
+            Entrar no ClickJob
           </CardTitle>
           <CardDescription>
             Insira suas credenciais para acessar a plataforma

@@ -18,26 +18,23 @@ export default function JobDetailsPage() {
 
     useEffect(() => {
         async function loadData() {
-            // Iniciamos o loading sempre que o ID mudar
             setLoading(true)
             try {
-                // 1. Carregamos os detalhes da vaga
                 const jobData = await getById(Number(id))
                 setJob(jobData)
 
-                // 2. Verificamos as credenciais no localStorage
                 const userId = localStorage.getItem("userId")
                 const role = localStorage.getItem("role")
 
-                // 3. Reforço na verificação de candidatura
                 if (role === "FREELANCER" && userId) {
-                    const apps = await getMyApplications(Number(userId))
-
-                    // Comparamos garantindo que ambos são números (evita erro de string vs number)
+                    const data = await getMyApplications(Number(userId))
+                    
+                    // CORREÇÃO: Tratando o formato de paginação do Spring (data.content)
+                    const appsArray = Array.isArray(data) ? data : (data?.content || [])
+                    
                     const currentId = Number(id)
-                    const alreadyApplied = apps.some((app: any) => {
-                        // Verificamos jobId direto ou dentro do objeto job (para cobrir ambos os casos do DTO)
-                        const appliedJobId = app.jobId || (app.job && app.job.id)
+                    const alreadyApplied = appsArray.some((app: any) => {
+                        const appliedJobId = app.job?.id || app.jobId
                         return Number(appliedJobId) === currentId
                     })
 
@@ -46,7 +43,6 @@ export default function JobDetailsPage() {
             } catch (error) {
                 console.error("Erro ao sincronizar dados:", error)
             } finally {
-                // Só removemos o loading após TODAS as verificações terminarem
                 setLoading(false)
             }
         }

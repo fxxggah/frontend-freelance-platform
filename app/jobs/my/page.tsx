@@ -99,7 +99,7 @@ export default function MyJobsPage() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <Link href={`/jobs/${job.id}/applications`}>
+                  <Link href={`/jobs/my/applicants/${job.id}`}>
                     <Button variant="outline" className="rounded-xl border-emerald-100 text-emerald-700 hover:bg-emerald-50">
                       <Users size={16} className="mr-2" /> Candidatos
                     </Button>

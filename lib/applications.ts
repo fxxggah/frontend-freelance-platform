@@ -15,28 +15,45 @@ export async function createApplication(jobId: number, freelancerId: number) {
     const errorMsg = await res.text();
     throw new Error(errorMsg || "Erro ao processar candidatura.");
   }
-
   return res.json();
 }
 
 export async function getMyApplications(freelancerId: number) {
-  if (!freelancerId || isNaN(freelancerId)) {
-    console.warn("ID inválido fornecido para getMyApplications");
-    return [];
-  }
-
+  if (!freelancerId || isNaN(freelancerId)) return [];
   try {
     const res = await fetch(`${API_URL}/applications/freelancer/${freelancerId}`, {
       headers: getAuthHeaders(),
     });
-
     if (!res.ok) return [];
-    
     const data = await res.json();
-    console.log("Dados vindos do Java:", data); // Debug essencial aqui
-    return data;
+    return Array.isArray(data) ? data : (data?.content || []);
   } catch (error) {
-    console.error("Erro na requisição getMyApplications:", error);
     return [];
   }
+}
+
+export async function getApplicationsByJob(jobId: number) {
+  try {
+    const res = await fetch(`${API_URL}/applications/job/${jobId}`, {
+      headers: getAuthHeaders(),
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    //  Garante que pegamos a lista correta do DTO ou Page
+    return Array.isArray(data) ? data : (data?.content || []);
+  } catch (error) {
+    console.error("Erro ao buscar candidatos:", error);
+    return [];
+  }
+}
+
+export async function updateApplicationStatus(applicationId: number, status: 'ACCEPTED' | 'REFUSED') {
+  // [cite: 28, 31] Endpoint PATCH /api/applications/{id}/status?status=...
+  const res = await fetch(`${API_URL}/applications/${applicationId}/status?status=${status}`, {
+    method: 'PATCH',
+    headers: getAuthHeaders(),
+  });
+
+  if (!res.ok) throw new Error("Erro ao atualizar status");
+  return res.json();
 }

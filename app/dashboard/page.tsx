@@ -53,7 +53,7 @@ export default function DashboardPage() {
     },
     {
       label: "Minhas Aplicações",
-      href: "/applications",
+      href: "/jobs/applications",
       icon: Briefcase,
       description: "Acompanhe suas candidaturas enviadas",
     },

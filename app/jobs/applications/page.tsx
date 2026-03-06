@@ -40,7 +40,7 @@ export default function MyApplicationsPage() {
         {applications.length === 0 ? (
           <Card className="p-12 text-center border-dashed">
             <Inbox className="mx-auto text-gray-300 mb-4" size={48} />
-            <p className="text-gray-500">Você ainda não se candidatou a nenhum job.</p>
+            <p className="text-gray-500">Você ainda não se candidatou a nenhuma Vaga.</p>
           </Card>
         ) : (
           <div className="grid gap-4">

@@ -58,7 +58,7 @@ export default function MyApplicationsPage() {
           <Card className="p-16 text-center border-dashed border-2 bg-white rounded-[2rem]">
             <Briefcase className="text-slate-200 mx-auto mb-4" size={64} />
             <h3 className="text-xl font-bold text-slate-400">Você ainda não se candidatou.</h3>
-            <Link href="/jobs/all" className="text-[#00897b] font-bold hover:underline mt-4 inline-block">
+            <Link href="/jobs" className="text-[#00897b] font-bold hover:underline mt-4 inline-block">
               Explorar vagas abertas
             </Link>
           </Card>

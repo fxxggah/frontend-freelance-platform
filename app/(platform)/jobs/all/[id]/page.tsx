@@ -29,12 +29,12 @@ export default function JobDetailsPage() {
 
                 if (role === "FREELANCER" && userId) {
                     const data = await getMyApplications(Number(userId))
-                    
+
                     // Tratando o formato de paginação do Spring (data.content)
                     const appsArray = Array.isArray(data) ? data : (data?.content || [])
-                    
+
                     const currentId = Number(id)
-                    
+
                     // CORREÇÃO AQUI: Usamos find() em vez de some() para pegar o objeto inteiro da candidatura
                     const appliedApp = appsArray.find((app: any) => {
                         const appliedJobId = app.job?.id || app.jobId
@@ -156,59 +156,53 @@ export default function JobDetailsPage() {
                     {localStorage.getItem("role") === "FREELANCER" && (
                         <div className="pt-10 border-t border-gray-100">
                             {isApplied ? (
-                                <div className={`relative overflow-hidden border-2 p-8 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-6 group animate-in fade-in zoom-in duration-500 ${
-                                    applicationStatus === 'ACCEPTED' ? 'bg-emerald-50 border-emerald-100' :
-                                    applicationStatus === 'REFUSED' ? 'bg-red-50 border-red-100' :
-                                    'bg-amber-50 border-amber-100' 
-                                }`}>
+                                <div className={`relative overflow-hidden border-2 p-8 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-6 group animate-in fade-in zoom-in duration-500 ${applicationStatus === 'ACCEPTED' ? 'bg-emerald-50 border-emerald-100' :
+                                        applicationStatus === 'REFUSED' ? 'bg-red-50 border-red-100' :
+                                            'bg-amber-50 border-amber-100'
+                                    }`}>
                                     <div className="flex items-center gap-5 relative z-10">
-                                        <div className={`w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg animate-bounce-subtle ${
-                                            applicationStatus === 'ACCEPTED' ? 'bg-emerald-500 shadow-emerald-200' :
-                                            applicationStatus === 'REFUSED' ? 'bg-red-500 shadow-red-200' :
-                                            'bg-amber-500 shadow-amber-200'
-                                        }`}>
+                                        <div className={`w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg animate-bounce-subtle ${applicationStatus === 'ACCEPTED' ? 'bg-emerald-500 shadow-emerald-200' :
+                                                applicationStatus === 'REFUSED' ? 'bg-red-500 shadow-red-200' :
+                                                    'bg-amber-500 shadow-amber-200'
+                                            }`}>
                                             {applicationStatus === 'ACCEPTED' && <CheckCircle2 size={32} />}
                                             {applicationStatus === 'REFUSED' && <XCircle size={32} />}
                                             {(!applicationStatus || applicationStatus === 'PENDING') && <Clock size={32} />}
                                         </div>
                                         <div>
-                                            <p className={`text-2xl font-black tracking-tight ${
-                                                applicationStatus === 'ACCEPTED' ? 'text-emerald-900' :
-                                                applicationStatus === 'REFUSED' ? 'text-red-900' :
-                                                'text-amber-900'
-                                            }`}>
+                                            <p className={`text-2xl font-black tracking-tight ${applicationStatus === 'ACCEPTED' ? 'text-emerald-900' :
+                                                    applicationStatus === 'REFUSED' ? 'text-red-900' :
+                                                        'text-amber-900'
+                                                }`}>
                                                 {applicationStatus === 'ACCEPTED' ? 'Voce foi aceito!' :
-                                                 applicationStatus === 'REFUSED' ? 'Candidatura não aprovada.' :
-                                                 'Você já é candidato!'}
+                                                    applicationStatus === 'REFUSED' ? 'Candidatura não aprovada.' :
+                                                        'Você já é candidato!'}
                                             </p>
-                                            <p className={`font-bold text-sm ${
-                                                applicationStatus === 'ACCEPTED' ? 'text-emerald-700/80' :
-                                                applicationStatus === 'REFUSED' ? 'text-red-700/80' :
-                                                'text-amber-700/80'
-                                            }`}>
+                                            <p className={`font-bold text-sm ${applicationStatus === 'ACCEPTED' ? 'text-emerald-700/80' :
+                                                    applicationStatus === 'REFUSED' ? 'text-red-700/80' :
+                                                        'text-amber-700/80'
+                                                }`}>
                                                 {applicationStatus === 'ACCEPTED' ? 'O contratante selecionou você para esta vaga.' :
-                                                 applicationStatus === 'REFUSED' ? 'Não desanime, busque novas oportunidades.' :
-                                                 'Sua candidatura está sendo analisada.'}
+                                                    applicationStatus === 'REFUSED' ? 'Não desanime, busque novas oportunidades.' :
+                                                        'Sua candidatura está sendo analisada.'}
                                             </p>
                                         </div>
                                     </div>
-                                    <div className={`flex items-center gap-2 bg-white px-4 py-2 rounded-xl border ${
-                                        applicationStatus === 'ACCEPTED' ? 'border-emerald-100' :
-                                        applicationStatus === 'REFUSED' ? 'border-red-100' :
-                                        'border-amber-100'
-                                    }`}>
-                                        {applicationStatus === 'ACCEPTED' ? <CheckCircle2 size={16} className="text-emerald-500" /> :
-                                         applicationStatus === 'REFUSED' ? <XCircle size={16} className="text-red-500" /> :
-                                         <Clock size={16} className="text-amber-500 animate-spin-slow" />}
-                                        
-                                        <Badge className={`bg-transparent border-none p-0 font-black text-[10px] uppercase tracking-tighter ${
-                                            applicationStatus === 'ACCEPTED' ? 'text-emerald-600' :
-                                            applicationStatus === 'REFUSED' ? 'text-red-600' :
-                                            'text-amber-600'
+                                    <div className={`flex items-center gap-2 bg-white px-4 py-2 rounded-xl border ${applicationStatus === 'ACCEPTED' ? 'border-emerald-100' :
+                                            applicationStatus === 'REFUSED' ? 'border-red-100' :
+                                                'border-amber-100'
                                         }`}>
+                                        {applicationStatus === 'ACCEPTED' ? <CheckCircle2 size={16} className="text-emerald-500" /> :
+                                            applicationStatus === 'REFUSED' ? <XCircle size={16} className="text-red-500" /> :
+                                                <Clock size={16} className="text-amber-500 animate-spin-slow" />}
+
+                                        <Badge className={`bg-transparent border-none p-0 font-black text-[10px] uppercase tracking-tighter ${applicationStatus === 'ACCEPTED' ? 'text-emerald-600' :
+                                                applicationStatus === 'REFUSED' ? 'text-red-600' :
+                                                    'text-amber-600'
+                                            }`}>
                                             {applicationStatus === 'ACCEPTED' ? 'Aceito' :
-                                             applicationStatus === 'REFUSED' ? 'Recusado' :
-                                             'Em Análise'}
+                                                applicationStatus === 'REFUSED' ? 'Recusado' :
+                                                    'Em Análise'}
                                         </Badge>
                                     </div>
                                 </div>

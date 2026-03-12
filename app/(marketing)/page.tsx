@@ -65,18 +65,18 @@ export default function LandingPage() {
                     </h1>
 
                     <p className="text-xl text-gray-500 font-medium max-w-2xl mb-12 leading-relaxed">
-                        A plataforma definitiva para desenvolvedores, designers e criadores. Encontre projetos desafiadores ou contrate os melhores profissionais em minutos.
+                        A plataforma definitiva para desenvolvedores, designers e criadores. Encontre projetos desafiadores ou contrate os melhores profissionais em só um lugar.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center gap-5 w-full justify-center">
-                        <Link href="/register?type=FREELANCER" className="w-full sm:w-auto">
+                        <Link href="/register" className="w-full sm:w-auto">
                             <Button className="w-full h-16 px-10 bg-white border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white text-lg font-black rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-1 active:translate-y-1 active:shadow-none">
-                                Sou Freelancer
+                                Quero trabalhar
                             </Button>
                         </Link>
-                        <Link href="/register?type=EMPLOYER" className="w-full sm:w-auto">
-                            <Button className="w-full h-16 px-10 bg-emerald-500 hover:bg-emerald-400 text-white text-lg font-black rounded-2xl shadow-[8px_8px_0px_0px_rgba(16,185,129,1)] transition-all active:translate-x-1 active:translate-y-1 active:shadow-none flex items-center gap-2">
-                                Quero Contratar <ArrowRight size={20} />
+                        <Link href="/register" className="w-full sm:w-auto">
+                            <Button className="w-full h-16 px-10 bg-white border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white text-lg font-black rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-1 active:translate-y-1 active:shadow-none">
+                                Quero contratar
                             </Button>
                         </Link>
                     </div>
@@ -87,9 +87,9 @@ export default function LandingPage() {
             <section className="bg-white border-y border-gray-100 py-12">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="flex flex-wrap justify-center md:justify-between items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                        <div className="flex items-center gap-3 font-black uppercase tracking-[0.2em] text-xs"><Globe size={18} className="text-emerald-500" /> 100% Remoto</div>
+                        <div className="flex items-center gap-3 font-black uppercase tracking-[0.2em] text-xs"><Globe size={18} className="text-emerald-500" /> Vagas remotas </div>
                         <div className="flex items-center gap-3 font-black uppercase tracking-[0.2em] text-xs"><Code2 size={18} className="text-emerald-500" /> Vagas de TI</div>
-                        <div className="flex items-center gap-3 font-black uppercase tracking-[0.2em] text-xs"><LineChart size={18} className="text-emerald-500" /> Pagamento Seguro</div>
+                        <div className="flex items-center gap-3 font-black uppercase tracking-[0.2em] text-xs"><LineChart size={18} className="text-emerald-500" /> Ambiente Seguro</div>
                         <div className="flex items-center gap-3 font-black uppercase tracking-[0.2em] text-xs"><Zap size={18} className="text-emerald-500" /> Contratação Ágil</div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@ export default function LandingPage() {
                             </div>
                             <h3 className="text-2xl font-black text-gray-900 mb-4 tracking-tight">Gestão Centralizada</h3>
                             <p className="text-gray-500 font-medium leading-relaxed">
-                                Acompanhe todas as suas propostas, vagas publicadas e candidatos diretamente do seu dashboard personalizado.
+                                Acompanhe todas as suas propostas, vagas publicadas e candidatos diretamente do seu dashboard.
                             </p>
                         </div>
                     </div>
@@ -148,27 +148,29 @@ export default function LandingPage() {
             </section>
 
             {/* CTA Final */}
-            <section className="py-24 px-6">
-                <div className="max-w-6xl mx-auto bg-gray-900 rounded-[4rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl">
-                    {/* Abstract shapes */}
-                    <div className="absolute -top-24 -right-24 w-80 h-80 bg-emerald-500/20 blur-[80px] rounded-full" />
-                    <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-teal-500/10 blur-[80px] rounded-full" />
+            <section className="py-12 md:py-24 px-4 md:px-6">
+                <div className="max-w-6xl mx-auto bg-gray-900 rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-24 text-center relative overflow-hidden shadow-2xl">
+                    {/* Shapes abstratos - Ajustados para não "vazarem" mobile */}
+                    <div className="absolute -top-12 -right-12 md:-top-24 md:-right-24 w-40 h-40 md:w-80 md:h-80 bg-emerald-500/20 blur-[60px] md:blur-[80px] rounded-full" />
+                    <div className="absolute -bottom-12 -left-12 md:-bottom-24 md:-left-24 w-40 h-40 md:w-80 md:h-80 bg-teal-500/10 blur-[60px] md:blur-[80px] rounded-full" />
 
-                    <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-8 relative z-10 leading-[1.1]">
-                        Pronto para o <br /> próximo nível?
+                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-white tracking-tighter mb-6 md:mb-8 relative z-10 leading-[1.1]">
+                        Pronto para o <br className="hidden sm:block" /> próximo nível?
                     </h2>
-                    <p className="text-gray-400 text-lg md:text-xl font-medium mb-12 max-w-2xl mx-auto relative z-10">
+
+                    <p className="text-gray-400 text-base md:text-xl font-medium mb-10 md:mb-12 max-w-2xl mx-auto relative z-10">
                         Junte-se a milhares de profissionais e empresas que já estão construindo o futuro do trabalho juntos.
                     </p>
 
-                    <Link href="/register" className="relative z-10 inline-block group">
-                        <Button className="h-16 px-12 bg-emerald-500 hover:bg-emerald-400 text-gray-900 text-xl font-black rounded-2xl shadow-xl shadow-emerald-500/20 transition-all group-hover:-translate-y-1">
-                            Comece Gratuitamente
+                    <Link href="/register" className="relative z-10 inline-block group w-full sm:w-auto">
+                        <Button className="w-full sm:w-auto h-14 md:h-16 px-8 md:px-12 bg-emerald-500 hover:bg-emerald-400 text-gray-900 text-lg md:text-xl font-black rounded-xl md:rounded-2xl shadow-xl shadow-emerald-500/20 transition-all group-hover:-translate-y-1">
+                            COMEÇAR AGORA
                         </Button>
-                        <div className="absolute inset-0 bg-emerald-500 rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity" />
+                        <div className="absolute inset-0 bg-emerald-500 rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity hidden sm:block" />
                     </Link>
                 </div>
             </section>
+
 
             {/* Footer */}
             <footer className="bg-white border-t border-gray-100 py-16 text-center">

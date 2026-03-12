@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from "react"
 import { getUserProfile, deleteAccount } from "@/lib/users"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
-import { Loader2, User, Mail, Briefcase, Trash2, ShieldAlert, Settings2 } from "lucide-react"
+import { Loader2, User, Mail, Briefcase, ShieldAlert, Settings2, LogOut } from "lucide-react"
 
 export default function ProfilePage() {
   const [user, setUser] = useState<any>(null)
@@ -44,78 +42,89 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div className="min-h-[80vh] flex items-center justify-center">
-        <Loader2 className="animate-spin text-emerald-600 w-8 h-8" />
+        <Loader2 className="animate-spin text-emerald-500 w-10 h-10" />
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-slate-50/50 pb-20">
-      {/* Banner de fundo sutil */}
-      <div className="h-32 bg-emerald-600 w-full mb-[-64px]" />
+    <div className="max-w-3xl mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
+      
+      {/* Container Principal: Fundo unificado e bordas arredondadas */}
+      <div className="bg-white rounded-[2.5rem] p-8 sm:p-10 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
+        
+        {/* Efeito visual sutil no topo (gradiente) em vez de um banner sólido */}
+        <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-emerald-50/50 to-transparent pointer-events-none" />
 
-      <div className="max-w-2xl mx-auto px-4">
-        <div className="space-y-6">
+        {/* --- HEADER: Avatar e Título --- */}
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-10 relative">
           
-          {/* Header & Avatar */}
-          <div className="flex flex-col items-center sm:items-end sm:flex-row gap-4 px-2">
-            <div className="relative">
-              <div className="w-24 h-24 bg-white rounded-2xl flex items-center justify-center shadow-xl border-4 border-white">
-                <User className="text-emerald-600 w-10 h-10" />
-              </div>
-              <div className="absolute -bottom-1 -right-1 p-1.5 bg-emerald-500 rounded-lg border-2 border-white shadow-sm">
-                <Settings2 className="text-white w-3 h-3" />
-              </div>
+          {/* Avatar Premium */}
+          <div className="relative group cursor-pointer">
+            <div className="w-28 h-28 bg-gradient-to-br from-emerald-100 to-teal-50 rounded-3xl flex items-center justify-center border border-white shadow-xl shadow-emerald-900/5 group-hover:scale-105 transition-all duration-300">
+              <User className="text-emerald-600 w-12 h-12" strokeWidth={1.5} />
             </div>
-            <div className="text-center sm:text-left pb-1">
-              <h1 className="text-2xl font-bold text-slate-900 leading-tight">{user?.name || "Usuário"}</h1>
-              <p className="text-slate-500 text-sm font-medium">Configurações da Conta</p>
+            <div className="absolute -bottom-2 -right-2 p-2.5 bg-slate-900 hover:bg-emerald-600 rounded-xl border-4 border-white shadow-lg transition-colors">
+              <Settings2 className="text-white w-4 h-4" />
             </div>
           </div>
 
-          {/* Main Content */}
-          <Card className="border-slate-200/60 shadow-sm overflow-hidden bg-white">
-            <CardHeader className="pb-4">
-              <CardTitle className="text-lg font-semibold text-slate-800">Informações Pessoais</CardTitle>
-              <CardDescription>Dados visíveis para recrutadores e parceiros.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-1">
-              <ProfileItem icon={<User size={18}/>} label="Nome" value={user?.name} />
-              <Separator className="my-2 bg-slate-100" />
-              <ProfileItem icon={<Mail size={18}/>} label="E-mail" value={user?.email} />
-              <Separator className="my-2 bg-slate-100" />
-              <ProfileItem 
-                icon={<Briefcase size={18}/>} 
-                label="Tipo de Perfil" 
-                value={user?.role} 
-                badge={user?.role} 
-              />
-            </CardContent>
-          </Card>
+          {/* Nome e Título */}
+          <div className="text-center sm:text-left pt-2">
+            <h1 className="text-3xl font-black text-slate-900 tracking-tight mb-2">
+              {user?.name || "Usuário"}
+            </h1>
+            <div className="flex items-center justify-center sm:justify-start gap-2">
+              <span className="text-slate-400 text-sm font-medium flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                Online agora
+              </span>
+            </div>
+          </div>
+        </div>
 
-          {/* Danger Zone */}
-          <Card className="border-red-100 bg-white overflow-hidden">
-            <div className="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex gap-4">
-                <div className="mt-1 p-2 bg-red-50 rounded-full">
-                  <ShieldAlert className="text-red-500 w-5 h-5" />
+        {/* --- CONTEÚDO: Informações do Usuário --- */}
+        <div className="space-y-8">
+          
+          {/* Sessão de Dados */}
+          <section>
+            <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 px-2">
+              Informações Pessoais
+            </h2>
+            <div className="bg-slate-50/50 rounded-3xl p-2 border border-slate-100/50 flex flex-col gap-1">
+              <ProfileItem icon={<User size={18}/>} label="Nome Completo" value={user?.name} />
+              <ProfileItem icon={<Mail size={18}/>} label="Endereço de E-mail" value={user?.email} />
+              <ProfileItem icon={<Briefcase size={18}/>} label="Tipo de Conta" value={user?.role} />
+            </div>
+          </section>
+
+          <hr className="border-slate-100" />
+
+          {/* --- DANGER ZONE --- */}
+          <section>
+            <div className="bg-red-50/30 border border-red-100 rounded-3xl p-6 flex flex-col sm:flex-row items-center justify-between gap-6 hover:border-red-200 transition-colors">
+              <div className="flex items-center gap-4 text-center sm:text-left">
+                <div className="p-3 bg-white shadow-sm rounded-2xl border border-red-100 hidden sm:block">
+                  <ShieldAlert className="text-red-500 w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-tight">Excluir Conta</h3>
-                  <p className="text-xs text-slate-500 max-w-[300px]">
-                    Sua conta e todos os dados serão removidos permanentemente de nossos servidores.
+                  <h3 className="text-base font-bold text-red-900 mb-1">Zona de Perigo</h3>
+                  <p className="text-sm text-red-600/80 font-medium">
+                    Ao excluir sua conta, todos os seus dados serão removidos permanentemente.
                   </p>
                 </div>
               </div>
+              
               <Button
                 onClick={handleDelete}
-                variant="outline"
-                className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 hover:border-red-300 transition-all text-xs font-semibold px-6"
+                variant="destructive"
+                className="w-full sm:w-auto bg-white text-red-600 hover:bg-red-50 hover:text-red-700 border border-red-200 shadow-sm font-bold rounded-xl h-11 px-6"
               >
-                Encerrar Conta
+                <LogOut className="w-4 h-4 mr-2" />
+                Excluir Conta
               </Button>
             </div>
-          </Card>
+          </section>
 
         </div>
       </div>
@@ -123,24 +132,20 @@ export default function ProfilePage() {
   )
 }
 
-function ProfileItem({ icon, label, value, badge }: any) {
+function ProfileItem({ icon, label, value }: any) {
   return (
-    <div className="flex items-center justify-between py-3 group">
-      <div className="flex items-center gap-4">
-        <div className="p-2.5 bg-slate-50 text-slate-400 rounded-xl group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-all">
-          {icon}
-        </div>
-        <div>
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">{label}</p>
-          <div className="flex items-center gap-2">
-            <span className="text-slate-700 font-semibold text-sm tracking-tight">{value}</span>
-            {badge && (
-              <Badge variant="secondary" className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50 border-none text-[10px] uppercase font-bold px-2 py-0">
-                {badge}
-              </Badge>
-            )}
-          </div>
-        </div>
+    <div className="flex items-center p-3.5 group hover:bg-white rounded-[1.25rem] transition-all duration-300 hover:shadow-[0_2px_10px_rgb(0,0,0,0.02)] border border-transparent hover:border-slate-100 cursor-default">
+      <div className="p-3 bg-white border border-slate-100 text-slate-400 rounded-xl transition-all duration-300 group-hover:bg-emerald-500 group-hover:text-white group-hover:border-emerald-500 group-hover:shadow-md group-hover:shadow-emerald-200 group-hover:-translate-y-0.5">
+        {icon}
+      </div>
+      
+      <div className="ml-4 flex-1">
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5 group-hover:text-emerald-600 transition-colors">
+          {label}
+        </p>
+        <p className="text-slate-900 font-bold text-[15px] tracking-tight truncate">
+          {value || "Não informado"}
+        </p>
       </div>
     </div>
   )

@@ -140,7 +140,7 @@ export default function JobListPage() {
       {/* FOOTER DO MURAL */}
       <div className="mt-20 text-center">
         <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.4em]">
-          Novas oportunidades todos os dias <span className="text-emerald-500">●</span> ClickJob
+          Novas oportunidades <span className="text-emerald-500">●</span> ClickJob
         </p>
       </div>
     </div>

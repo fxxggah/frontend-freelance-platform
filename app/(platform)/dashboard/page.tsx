@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { Briefcase, FilePlus, FolderOpen, ArrowRight, Sparkles } from "lucide-react"
+import { Briefcase, FilePlus, FolderOpen, ArrowRight, Sparkles, LayoutList, ClipboardList, FolderKanban } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 
@@ -43,10 +43,10 @@ export default function DashboardPage() {
       color: "emerald"
     },
     {
-      label: "Criar Job",
-      href: "/jobs/create",
-      icon: FilePlus,
-      description: "Publique uma nova vaga e encontre o talento ideal agora.",
+      label: "Ver meus jobs",
+      href: "/jobs/my",
+      icon: LayoutList,
+      description: "Gerencie suas vagas e acompanhe os candidatos.",
       color: "blue"
     },
     {

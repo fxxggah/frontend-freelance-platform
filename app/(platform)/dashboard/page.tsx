@@ -60,7 +60,7 @@ export default function DashboardPage() {
 
   const filteredActions = allActions.filter((action) => {
     if (role === "EMPLOYER") return action.label !== "Minhas Aplicações"
-    if (role === "FREELANCER") return action.label !== "Criar Job"
+    if (role === "FREELANCER") return action.label !== "Ver meus jobs"
     return false
   })
 

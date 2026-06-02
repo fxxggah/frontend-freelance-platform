@@ -1,4 +1,4 @@
-# 💻 Freelance Platform — Frontend
+# 💻 Clickjob — Frontend
 
 Frontend da plataforma de freelancers desenvolvida como projeto de TCC, inspirado em plataformas como Upwork e Workana.
 
